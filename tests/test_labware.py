@@ -2,6 +2,8 @@ from pyindex.labware import Labware
 from pyindex.registry import Registry
 from pyindex.error import BadJSONError
 import sys
+import pickle
+import os
 
 
 def test_instantiation():
@@ -40,6 +42,23 @@ def test_save():
     """Test for uncorrupted serialization in the correct location."""
 
     registry = Registry()
+    with open("labware_json/lp_0200.json", "r") as f:
+        json_data = f.read().replace('\n', '')
+    lp = Labware(json_data)
+    lp.save(registry)
+
+    lp_file = os.path.join(registry.obj_dir, lp.id)
+    # Should have a new serialized object in our directory.
+    assert(os.path.exists(lp_file))
+    with open(lp_file, "rb") as f:
+        assert(pickle.load(f) == lp)
+    # Index should be updated with mapping to correct hashID.
+    assert(os.path.exists(registry.index))
+    with open(registry.index, "rb") as f:
+        map = pickle.load(f)
+        assert(map[lp.name] == lp.id)
+        assert(len(map) == 1)
+
     registry.wipe()
 
 

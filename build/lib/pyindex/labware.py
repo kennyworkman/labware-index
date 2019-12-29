@@ -87,9 +87,13 @@ class Labware():
         with open(obj_file, "wb+") as f:
             pickle.dump(self, f)
 
-        with open(registry.index, "wb+") as f:
+        # Need to read the hash map and write to it with different context
+        # managers to avoid corrupting the file.
+        map = None
+        with open(registry.index, "rb") as f:
             map = pickle.load(f)
             map[self.name] = self.id
+        with open(registry.index, "wb+") as f:
             pickle.dump(map, f)
 
     def hash(self):

@@ -81,15 +81,30 @@ class Labware():
         self.id = self.hash()
 
     def save(self, registry):
-        """Stores a serialized version of self in the Registry."""
+        """Stores a serialized version of self in the Registry.
+
+        The process of "saving" is twofold:
+
+        * A serialized object is stored in the object directory with a filename
+         corresponding to its SHA-1 hash code.
+        * The index file is updated with a mapping of this object's informal
+         name to its hashcode.
+
+        :param registry: Target Registry to save this piece of Labware to.
+        :type registry: Registry
+        """
 
         obj_file = os.path.join(registry.obj_dir, self.id)
         with open(obj_file, "wb+") as f:
             pickle.dump(self, f)
 
-        with open(registry.index, "wb+") as f:
+        # Need to _read_ the hash map and _write_ to it with different context
+        # managers to avoid corrupting the file.
+        map = None
+        with open(registry.index, "rb") as f:
             map = pickle.load(f)
             map[self.name] = self.id
+        with open(registry.index, "wb+") as f:
             pickle.dump(map, f)
 
     def hash(self):
