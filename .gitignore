@@ -1,0 +1,6 @@
+build/
+dist/
+pyindex.egg-info
+*.swp
+.labware
+

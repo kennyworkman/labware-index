@@ -34,10 +34,10 @@ class Registry():
     def __init__(self):
         """Creates a fresh Registry in the current working directory.
 
-        The *existence* of a Registry is defined simply by the existence of a
+        The *existence* of a Registry is defined simply by a
         `.labware` directory in the current working directory; attempting to
-        instantiate a Registry with this directory present will result in an
-        error.
+        instantiate a Registry with this directory present will "load" this
+        data into the new object.
 
         Deleting this `.labware` folder will permanently wipe data from the
         indexing tool. A new Registry can be created at this point.
@@ -45,20 +45,16 @@ class Registry():
 
         self.obj_dir = os.path.join(os.path.dirname(__file__), '..',
                                     '.labware')
+        self.index = os.path.join(self.obj_dir, 'index')
+
         if (os.path.exists(self.obj_dir)):
-            raise ExistingRegistryError("A Registry already exists in the"
-                                        " working directory. Remove the"
-                                        " .labware directory to create"
-                                        " a new one.")
+            print("\nExisting registry loaded from disk:")
+            print(self)
         else:
             os.makedirs(self.obj_dir)
-
-        # Serializing an empty HashMap saves future checks for object existence
-        # when loading from file.
-        self.index = os.path.join(self.obj_dir, 'index')
-        with open(self.index, 'wb+') as f:
-            map = {}
-            pickle.dump(map, f)
+            with open(self.index, 'wb+') as f:
+                map = {}
+                pickle.dump(map, f)
 
     def add(self, labware, name=None):
         """Adds a Labware object to the Registry.
@@ -166,10 +162,16 @@ class Registry():
     def __repr__(self):
         """Representation of Registry"""
         rep = "\nLabware Registry\n"
-        rep += "________________\n"
+        rep += "________________\n\n"
 
         for labware in self.list():
             rep += labware
+            rep += " --> "
+            rep += self.get(labware).__repr__()
             rep += "\n"
 
         return rep
+
+    def __eq__(self, other):
+        """Identical attributes between objects is sufficient for equality."""
+        return self.__dict__ == other.__dict__

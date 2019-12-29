@@ -98,11 +98,14 @@ class Labware():
         :type name: str
         """
 
+        # Hash ID should reflect any changes in object fields.
+        self.id = self.hash()
+
         obj_file = os.path.join(registry.obj_dir, self.id)
         with open(obj_file, "wb+") as f:
             pickle.dump(self, f)
 
-        # Need to _read_ the hash map and _write_ to it with different context
+        # Need to read and write to the hash map with different context
         # managers to avoid corrupting the file.
         map = None
         name = self.name if not name else name

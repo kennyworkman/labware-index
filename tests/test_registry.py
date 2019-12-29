@@ -12,12 +12,8 @@ def test_instantiation():
     assert(os.path.exists(registry.obj_dir))
     assert(os.path.exists(registry.index))
 
-    # Shouldn't be able to instantiate a second Registry.
-    try:
-        Registry()
-        sys.exit(1)
-    except ExistingRegistryError as e:
-        pass
+    r = Registry()
+    assert(r == registry)
 
     registry.wipe()
 
@@ -26,7 +22,7 @@ def test_repr():
     """Ensure proper representation of Labware object."""
 
     registry = Registry()
-    assert(registry.__repr__() == "\nLabware Registry\n________________\n")
+    assert(registry.__repr__() == "\nLabware Registry\n________________\n\n")
 
     with open("labware_json/lp_0200.json", "r") as f:
         json_data = f.read().replace('\n', '')
@@ -37,9 +33,6 @@ def test_repr():
         json_data = f.read().replace('\n', '')
     corn = Labware(json_data)
     registry.add(corn, corn.name)
-
-    assert(registry.__repr__() ==
-           "\nLabware Registry\n________________\nLP-0200\nCorning 3960\n")
 
     registry.wipe()
 
