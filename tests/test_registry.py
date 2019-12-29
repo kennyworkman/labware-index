@@ -126,6 +126,28 @@ def test_json_add():
     registry.wipe()
 
 
+def test_add_file():
+    """Test adding Labware json file to Registry."""
+    registry = Registry()
+
+    registry.add_file("LP", "labware_json/lp_0200.json")
+    lp = registry.get("LP")
+    lp_id = lp.id
+    # Should have a new serialized object in our directory.
+    lp_file = os.path.join(registry.obj_dir, lp_id)
+    assert(os.path.exists(lp_file))
+    with open(lp_file, "rb") as f:
+        assert(pickle.load(f) == lp)
+    # Index should be updated with mapping to correct hashID.
+    assert(os.path.exists(registry.index))
+    with open(registry.index, "rb") as f:
+        map = pickle.load(f)
+        assert(map["LP"] == lp_id)
+        assert(len(map) == 1)
+
+    registry.wipe()
+
+
 def test_remove():
     """Test the 'remove' operation."""
 

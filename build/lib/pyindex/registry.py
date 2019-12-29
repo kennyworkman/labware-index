@@ -71,7 +71,7 @@ class Registry():
         labware.save(self, name)
 
     def add_json(self, name, json_data):
-        """Adds a Labware object to the Registry using JSON data.
+        """Adds a Labware object to the Registry using raw JSON data.
 
         :param name: User-defined name to identify the labware.
         :type name: str
@@ -82,6 +82,20 @@ class Registry():
         """
         labware = Labware(json_data)
         self.add(labware, name)
+
+    def add_file(self, name, file):
+        """Adds a Labware object to the Registry using a .json file.
+
+        :param name: User-defined name to identify the labware.
+        :type name: str
+        :param file: A path to a file containing valid JSON data (validity
+        specified in `add_json` function)
+        :type file: str
+        """
+
+        with open(file, "r") as f:
+            json_data = f.read().replace('\n', '')
+        self.add_json(name, json_data)
 
     def get(self, name):
         """Retrieves a Labware object from the Registry.
