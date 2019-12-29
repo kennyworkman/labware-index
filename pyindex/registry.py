@@ -165,10 +165,11 @@ class Registry():
         rep += "________________\n\n"
 
         for labware in self.list():
+            rep += "* "
             rep += labware
             rep += " --> "
             rep += self.get(labware).__repr__()
-            rep += "\n"
+            rep += "\n\n"
 
         return rep
 
