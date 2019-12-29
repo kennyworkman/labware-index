@@ -1,0 +1,20 @@
+{     
+    "name": "Bio-Rad-HSP9601B",
+    "plate": {
+        "sterile": false,
+        "skirted": true,
+        "enzyme_free": true,
+        "length": 127.76,
+        "width": 85.48,
+        "height": 16.06,
+        "well_spacing": 9.00,
+        "well_num": 96,
+        "composition": "Polypropylene"
+    },
+    "well": {
+        "volume": 200,
+        "depth": 14.81,
+        "top_diameter": 5.46,
+        "bottom_diameter": 2.64
+    }
+}    

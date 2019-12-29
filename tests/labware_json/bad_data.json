@@ -1,0 +1,19 @@
+{     
+    "name": "LP-0200",
+    "plate": {
+        "skirted": true,
+        "enzyme_free": true,
+        "length": 127.76,
+        "width": 85.48,
+        "height": 10.48,
+        "well_spacing": 4.5,
+        "well_num": 384,
+        "composition": "Cyclic Olefin Copolymer"
+    },
+    "well": {
+        "volume": 14,
+        "depth": 5.10,
+        "top_diameter": 2.432,
+        "bottom_diameter": 1.53
+    }
+}    
