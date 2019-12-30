@@ -1,11 +1,5 @@
 .. _api:
 
-The `pyindex` package makes up the bulk of the Labware Registry's back-end
-infrastructure.
-
-This part of the documentation covers an in-depth breakdown of the application
-interface, highlighting certain design choices in class architecture.
-
 The Registry
 -------------
 

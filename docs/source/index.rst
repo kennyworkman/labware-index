@@ -23,20 +23,38 @@ Quickstart and Unit Testing
 API Reference
 -------------
 
-What follows is a thorough specification of the entire pyindex API.
-If you are looking for information on a specific function, class or
-method, this part of the documentation is for you.
+What follows is a thorough specification of the entire pyindex API; an in-depth
+breakdown of the application interface, highlighting certain design choices in
+class architecture.
+
 
 .. toctree::
    :maxdepth: 2
 
    api
 
+  
+Using the API
+-------------
+
+.. toctree::
+   :maxdepth: 2
+
+   api_use
 
 
-Indices and tables
-==================
+Using the GUI
+-------------
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. toctree::
+   :maxdepth: 2
+
+   gui_use
+
+Extension
+---------
+
+.. toctree::
+   :maxdepth: 2
+
+   extension
