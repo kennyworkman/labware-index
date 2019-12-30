@@ -163,6 +163,11 @@ class Registry():
         **This is a dangerous and irreversible operation.**
         """
         shutil.rmtree(self.obj_dir)
+        # Initialize blank persistent file system.
+        os.makedirs(self.obj_dir)
+        with open(self.index, 'wb+') as f:
+            map = {}
+            pickle.dump(map, f)
 
     def __repr__(self):
         """Representation of the Registry"""
