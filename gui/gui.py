@@ -155,6 +155,32 @@ def show_info(index, table):
     window.close()
 
 
+def show_help():
+    """Show a pop-up help page."""
+    t = (17, 1)
+    layout = [[sg.Text("Command Overview", font="Any 16")],
+              [sg.Text("Info", size=t,),
+                  sg.Text("Select desired Labware for a summary of"
+                          " characteristics.", justification="left")],
+              [sg.Text("Remove", size=t,),
+                  sg.Text("Select desired Labware to permenantly delete from"
+                          " the Registry.", justification="left")],
+              [sg.Text("Add", size=t,),
+                  sg.Text("Fill in characteristics for a new Labware using the"
+                          " GUI.", justification="left")],
+              [sg.Text("Add From File", size=t,),
+                  sg.Text("Load a new Labware using a valid .json file.",
+                          justification="left")],
+              [sg.Text("Wipe", size=t,),
+                  sg.Text("Permanently delete the contents of the Registry.",
+                          justification="left")],
+              [sg.Cancel()]]
+
+    window = sg.Window('Labware Registry', layout)
+    event, values = window.read()
+    window.close()
+
+
 def add_from_file():
     """Adds Labware from user selected JSON file.
 
@@ -233,33 +259,31 @@ def confirm_window():
 
 if __name__ == "__main__":
     data = init_table()
-    headings = ["Name", "Labware", "length", "width",
-                "height", "well number", "well volume"]
+    headings = ["Name", "Labware", "Length", "Width",
+                "Height", "Well Number", "Well Volume"]
     layout = [[sg.Table(values=data, headings=headings,
                         max_col_width=25,
                         auto_size_columns=True,
                         justification='center',
                         num_rows=15,
-                        key="TABLE",
-                        tooltip='This is a table')],
+                        key="TABLE")],
               [sg.Button("Info"), sg.Button("Remove"), sg.Button("Add"),
                sg.Button("Add From File"), sg.Button("Wipe"),
                sg.Button("Help")]]
     window = sg.Window("Labware Registry",
                        layout,
-                       no_titlebar=True,
                        alpha_channel=0.95,
                        grab_anywhere=True)
 
     while True:
         event, values = window.read()
-        if event == "Info":
+        if (event == "Info"):
             if values["TABLE"]:
                 table = window["TABLE"].get()
                 for num in values["TABLE"]:
                     show_info(num, table)
 
-        if event == "Remove":
+        if (event == "Remove"):
             # Provides courtesy pop-up before permanent damage made.
             if values["TABLE"] and confirm_window():
                 table = window["TABLE"].get()
@@ -297,7 +321,10 @@ if __name__ == "__main__":
                 init_table()
                 window["TABLE"].update(values=update_table())
 
-        # Will terminate the script in the event of a manual exit.
+        if (event == "Help"):
+            show_help()
+
+            # Will terminate the script in the event of a manual exit.
         if (event is None):
             break
 
