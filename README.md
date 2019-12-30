@@ -36,9 +36,9 @@ essential functionality and safe-guarding against potential edge cases.
 
 To run the suite of unit tests, navigate to the `tests` directory and run pytest:
 
-    ```
-      cd tests 
-      pytest
-    ```
+```
+  cd tests 
+  pytest
+```
 
 Verbose feedback from the testing suite should be provided in terminal. If tests fail, make sure the Download steps were followed correctly. Consider rebuilding the package from source. `pytest` uses the locally built package sitting in your virtual environment to run its testing suite.
