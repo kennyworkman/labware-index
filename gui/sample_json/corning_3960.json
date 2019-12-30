@@ -1,0 +1,20 @@
+{     
+    "name": "Corning 3960",
+    "plate": {
+        "sterile": true,
+        "skirted": true,
+        "enzyme_free": true,
+        "length": 127.8,
+        "width": 85.9,
+        "height": 43.8,
+        "well_spacing": 9,
+        "well_num": 96,
+        "composition": "Polypropylene"
+    },
+    "well": {
+        "volume": 2000,
+        "depth": 42.03,
+        "top_diameter": 8.15,
+        "bottom_diameter": null
+    }
+}    

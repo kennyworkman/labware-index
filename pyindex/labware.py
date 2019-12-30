@@ -49,10 +49,11 @@ class Labware():
             }
 
         A more complete specifications describing these fields can be found in
-        TODO.
+        the parameter descriptions of the `Plate` and `Well` object
+        documentation.
 
         :param json_data: Valid JSON data as described above.
-        :raises : TODO
+        :type json_data: JSON
         """
         decoded = json.loads(json_data)
 
@@ -116,7 +117,7 @@ class Labware():
             pickle.dump(map, f)
 
     def hash(self):
-        """Generate an SHA-1 hashcode for this object.
+        """Generates an SHA-1 hashcode for this object.
 
         Unique generation will avoid potential hashing collissions that emerge
         from indexing based on user-defined naming schemes.

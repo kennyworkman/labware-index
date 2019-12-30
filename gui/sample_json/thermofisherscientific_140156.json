@@ -1,0 +1,20 @@
+{     
+    "name": "ThermoFisher Scientific 140156",
+    "plate": {
+        "sterile": true,
+        "skirted": true,
+        "enzyme_free": false,
+        "length": 127.8,
+        "width": 85.5,
+        "height": 14.5,
+        "well_spacing": null,
+        "well_num": 1,
+        "composition": "Polysytrene"
+    },
+    "well": {
+        "volume": 14,
+        "depth": 11.6,
+        "top_diameter": null,
+        "bottom_diameter": 144.3
+    }
+}    
